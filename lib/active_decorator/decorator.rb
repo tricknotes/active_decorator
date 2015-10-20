@@ -18,7 +18,7 @@ module ActiveDecorator
           decorate r
         end
       elsif defined?(ActiveRecord) && obj.is_a?(ActiveRecord::Relation) && !obj.respond_to?(:to_a_with_decorator)
-        obj.class.class_eval do
+        obj.singleton_class.class_eval do
           def to_a_with_decorator
             to_a_without_decorator.tap do |arr|
               ActiveDecorator::Decorator.instance.decorate arr
